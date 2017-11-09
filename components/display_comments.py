@@ -1,3 +1,12 @@
+# Please read in this order:
+#   1. welcome.yaml
+#   2. toggle_comment_collection.py
+#   3. gather_text.yaml
+#   4. check_settings.py
+#   5. gather.py
+#   6. gather_complete.yaml
+#   7. display_comments.py
+#
 from meya import Component
 
 
