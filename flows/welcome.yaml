@@ -1,0 +1,27 @@
+# Please read in this order:
+#   1. welcome.yaml
+#   2. toggle_comment_collection.py
+#   3. gather_text.yaml
+#   4. gather.py
+#   5. gather_complete.yaml
+#
+name: welcome
+states:
+    start:
+        component: meya.text
+        properties:
+            text: >
+                Thank you for attending our event! What did you think of it?
+                (Send as many messages as you'd like, followed by a single message containing the word `done`.)
+
+    comment_collection_on:
+        # We don't always want to collect comments. This component allows us to
+        # turn the feature on and off.
+        component: toggle_comment_collection
+        transitions:
+            next: finally
+
+    finally:
+        component: meya.pass
+
+# The user's next entries will trigger the gather_text flow. Go take a look.

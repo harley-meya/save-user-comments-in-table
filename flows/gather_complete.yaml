@@ -1,0 +1,37 @@
+# Please read in this order:
+#   1. welcome.yaml
+#   2. toggle_comment_collection.py
+#   3. gather_text.yaml
+#   4. gather.py
+#   5. gather_complete.yaml
+#
+name: gather_complete
+states:
+
+    # If we were collecting the user's comments, display them, otherwise skip
+    # to the end.
+    check_equal:
+        component: check_settings
+        transitions:
+            equal: display_text
+            notequal: finally
+
+    display_text:
+        component: meya.text
+        properties:
+            text: "Thanks for your feedback! Here's what you said:"
+
+    # Display the user's comments
+    summarize:
+        component: display_comments
+        transitions:
+            next: comment_collection_off
+
+    # Delete the user's saved comments and stop collecting new ones.
+    comment_collection_off:
+        component: toggle_comment_collection
+        transitions:
+            next: finally
+
+    finally:
+        component: meya.pass

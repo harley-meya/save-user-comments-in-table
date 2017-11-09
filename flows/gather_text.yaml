@@ -1,0 +1,35 @@
+# Please read in this order:
+#   1. welcome.yaml
+#   2. toggle_comment_collection.py
+#   3. gather_text.yaml
+#   4. gather.py
+#   5. gather_complete.yaml
+#
+name: gather_text
+states:
+
+    # This is a catchall, but nothing will happen unless this was triggered
+    # immediately after the welcome flow.
+
+    # If gather_data is true, we'll gather the user's comments, otherwise we'll
+    # skip to the end.
+    check_equal:
+        component: check_settings
+        transitions:
+            equal: first
+            notequal: success
+
+    # This state is where the actual text collection is done. See the gather.py
+    # component to understand what's happening behind the scenes.
+    first:
+        component: gather
+        transitions:
+            next: success
+
+    # We need a place for the check_settings.py and gather.py components to
+    # resolve to.
+    success:
+        component: meya.pass
+
+# This flow will keep being triggered by the user until they type `done`, which
+# will trigger the gather_complete flow. Go there now.

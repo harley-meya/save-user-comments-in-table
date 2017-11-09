@@ -1,0 +1,9 @@
+-   flow: gather_complete
+    intent: meya.keyword
+    settings:
+        ignorecase: true
+        keyword: done
+-   flow: gather_text
+    intent: meya.catchall
+-   flow: welcome
+    intent: meya.open_chat
